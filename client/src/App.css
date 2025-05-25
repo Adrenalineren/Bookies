@@ -1,8 +1,3 @@
-body{
-  color: rgb(128, 91, 46);
-  background-color: rgb(206, 178, 135);
-}
-
 main{
   padding: 10px;
   max-width: 600px;
@@ -18,6 +13,7 @@ header{
   display: flex; /* so they appear next to each other */
   justify-content: space-between;
   margin-bottom: 40px;
+  align-items: center;
 }
 
 header a{
@@ -27,19 +23,30 @@ header a{
 
 header a.logo{
   font-weight: bolder;
-  font-size: 20;
+  font-size: 0.7cm;
+  color: rgb(102, 84, 63);
 }
 
 header nav{
   display: flex;
   gap: 15px;
+  color: rgb(102, 84, 63);
+  font-weight: bold;
 }
 
 div.post{
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
+  gap: 20px;
+  margin-bottom: 30px;
 }
 
 div.post div.texts h3{
   font-size: 1.2rem;
+}
+
+div.post p.review{
+  margin: 6px 0;
+  font-size: 15px;
+  line-height: 1.4rem;
 }
