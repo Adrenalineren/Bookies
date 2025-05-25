@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 main{
   padding: 10px;
   max-width: 600px;
@@ -49,4 +53,33 @@ div.post p.review{
   margin: 6px 0;
   font-size: 15px;
   line-height: 1.4rem;
+}
+
+form.login, form.register{
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input{
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 5px;
+  border: 0;
+  background-color: rgb(236, 209, 174);
+  border-radius: 5px;
+}
+
+button{
+  width: 100%;
+  display: block;
+  background-color: #814b36 ;
+  color: rgb(219, 209, 173);
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+form h1{
+  text-align: center;
 }
