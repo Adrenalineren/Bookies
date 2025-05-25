@@ -10,15 +10,14 @@ main{
 }
 
 img{
-  max-width: 100px;
-  padding:10px;
+  max-width: 250px;
   margin: 0 auto;
 }
 
 header{
   display: flex; /* so they appear next to each other */
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 header a{
@@ -27,10 +26,20 @@ header a{
 }
 
 header a.logo{
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: 20;
 }
 
 header nav{
   display: flex;
   gap: 15px;
+}
+
+div.post{
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+}
+
+div.post div.texts h3{
+  font-size: 1.2rem;
 }
