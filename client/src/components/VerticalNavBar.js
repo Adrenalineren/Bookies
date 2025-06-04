@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const VerticalNavBar = () => {
   return (
     <div className="vertical-navbar">
-      <a href="#home" className="nav-link">
-            <img src="/home.png" alt="Home icon" className="nav-icon"/>
-            <span>Home</span>
-        </a>
+      <Link to="/Profile" className="nav-link">
+            <img src="/profile.png" alt="Profile icon" className="nav-icon"/>
+            <span>Profile</span>
+        </Link>
       <a href="#friends" className="nav-link">
         <img src="/friends.png" alt="Friend icon" className="nav-icon"/>
         <span>Friends</span>

@@ -68,6 +68,37 @@ app.post('/logout', (req,res) => {
     res.cookie('token', '').json('ok');
 });
 
+//To update avatar and bio
+app.put('/profile', async (req,res) => {
+    const {token} = req.cookies;
+    const {avatar, bio} = req.body;
+    try {
+        const userDecoded = jwt.verify(token, secret);
+        console.log("Decoded")
+        const updatedUser = await User.findByIdAndUpdate(
+            userDecoded.id,
+            {avatar, bio},
+            {new:true}
+        );
+        res.json(updatedUser);
+    } catch (err) {
+        res.status(401).json('Unauthorized');
+    }
+});
+
+//Get user info to display on profile page
+app.get('/user', async (req, res) => {
+  const { token } = req.cookies;
+  if (!token) return res.status(401).json('No token');
+
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) throw err;
+    const userDoc = await User.findById(info.id);
+    res.json(userDoc);
+  });
+});
+
+
 app.listen(4000);
 
 //mongodb+srv://admin:Bookiesadmin123@cluster0.gxfpsx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
