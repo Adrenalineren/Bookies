@@ -94,7 +94,7 @@ div.post p.info{
 /*Styling for vertical nav bar*/
 .vertical-navbar {
   height: 100vh;
-  width: 150px;
+  width: 110px;
   padding-top: 20px;
   position: fixed;
   top: 0;
@@ -112,7 +112,7 @@ div.post p.info{
   align-items: center;
   justify-content: center;
   padding: 30px 0;
-  font-size: 18px;
+  font-size: 15px;
   width: 100%;
   text-align: center;
   color: #814b36;
@@ -121,7 +121,7 @@ div.post p.info{
 }
 
 .nav-icon {
-  width:30px;
-  height:30px;
+  width:25px;
+  height:25px;
   margin-bottom: 5px;
 }

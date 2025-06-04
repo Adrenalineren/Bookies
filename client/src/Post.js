@@ -3,7 +3,7 @@ export default function Post() {
         <div className="post">
             <div className="image">
             <img 
-            src="https://img.pikbest.com/wp/202435/of-books-and-opened-book-on-the-top-cartoon-illustration_10770955.jpg!bw700"
+            src="https://png.pngtree.com/png-vector/20240201/ourmid/pngtree-aesthetic-book-illustration-png-image_11530249.png"
             alt="stack of books picture"
             />
             </div>
