@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useContext, useState } from "react";
 import { UserContext } from "./UserContext";
+import VerticalNavBar from "./components/VerticalNavBar";
 
 
 export default function Header() {
@@ -32,6 +33,7 @@ export default function Header() {
       <nav>
         {username && (
           <>
+            <VerticalNavBar />
             <Link to="/create">Create new book</Link>
             <a onClick={logout} >Logout</a>
           </>
