@@ -17,7 +17,7 @@ const secret = 'andowneiaosnqsdmvow';
 app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
-
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 //Connect to database
 mongoose.connect('mongodb+srv://admin:Bookiesadmin123@cluster0.gxfpsx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
@@ -30,7 +30,13 @@ app.post('/register', async (req,res) => {
             username,
             password:bcrypt.hashSync(password,salt), //hash password
         });
-        res.json(userDoc);
+        jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
+            if(err) throw err;
+            res.cookie('token', token).json({
+                id:userDoc._id,
+                username,
+            });
+        });
     } catch(e) {
         res.status(400).json(e);
     }
@@ -107,14 +113,18 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
-    const {title, details, content} = req.body;
+    const {title, review, content} = req.body;
     const postDoc = await Post.create({
         title, 
-        details,
+        review,
         content,
         cover:newPath,
     })
     res.json(postDoc);
+});
+
+app.get('/post', async (req, res) => {
+    res.json(await Post.find());
 });
 
 app.listen(4000);

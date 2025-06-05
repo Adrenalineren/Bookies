@@ -21,14 +21,14 @@ import {Navigate} from 'react-router-dom';
 
 export default function CreateBook() {
     const [title,setTitle] = useState('');
-    const [details,setDetails] = useState('');
+    const [review,setReview] = useState('');
     const [content,setContent] = useState('');
     const [files, setFiles] = useState('');
     const [redirect, setRedirect] = useState(false);
     async function createNewPost(ev) {
         const data = new FormData();
         data.set('title', title);
-        data.set('details', details);
+        data.set('review', review);
         data.set('content', content);
         data.set('file', files[0]);
         ev.preventDefault();
@@ -51,10 +51,10 @@ export default function CreateBook() {
                 placeholder="Title" 
                 value={title} 
                 onChange={ev => setTitle(ev.target.value)} />
-            <input type="details" 
-                placeholder="Details"
-                value={details}
-                onChange={ev => setDetails(ev.target.value)} />
+            <input type="review" 
+                placeholder="Review"
+                value={review}
+                onChange={ev => setReview(ev.target.value)} />
             <input type="file" 
                 onChange={ev => setFiles(ev.target.files)}/>
             <ReactQuill 
