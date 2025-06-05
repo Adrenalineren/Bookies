@@ -1,2 +1,3 @@
-*.pack
 .eslintcache
+*.pack
+*.idx
