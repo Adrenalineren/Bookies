@@ -3,7 +3,7 @@ const {Schema, model} = mongoose;
 const UserSchema = new Schema({
     username : {type:String, required:true, min:4, unique: true},
     password : {type:String, required:true},
-    avatar: {type: String, default: ""},
+    avatar: {type: String, default: "/default-avatar.png"},
     bio : {type:String, default: ""},
 });
 

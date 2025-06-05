@@ -30,7 +30,13 @@ app.post('/register', async (req,res) => {
             username,
             password:bcrypt.hashSync(password,salt), //hash password
         });
-        res.json(userDoc);
+        jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
+            if(err) throw err;
+            res.cookie('token', token).json({
+                id:userDoc._id,
+                username,
+            });
+        });
     } catch(e) {
         res.status(400).json(e);
     }

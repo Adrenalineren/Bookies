@@ -60,6 +60,12 @@ form.login, form.register{
   margin: 0 auto;
 }
 
+label {
+  font-weight: 600;
+  color: #814b36;
+  padding: 0.5rem;
+}
+
 input{
   display: block;
   margin-bottom: 5px;
@@ -124,4 +130,46 @@ div.post p.info{
   width:25px;
   height:25px;
   margin-bottom: 5px;
+}
+
+/*PROFILE PAGE*/
+.profile-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  margin: 0;
+}
+
+.profile-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.bio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.edit-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+.edit-input:focus {
+  border-color: #007bff;
+  outline: none;
 }
