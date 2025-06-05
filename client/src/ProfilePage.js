@@ -1,9 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 
 const ProfilePage = () => {
     const {userInfo} = useContext(UserContext);
+
+    if (!userInfo) {
+        return <Navigate to="/login" />;
+    }
+
     const [user, setUser] = useState({
         name: userInfo.username,
         bio: "",
