@@ -47,6 +47,20 @@ div.post{
 
 div.post div.texts h3{
   font-size: 1.2rem;
+  margin: 0;
+}
+
+div.post p.info{
+  margin: 0;
+  color: #805847;
+  font-size: 7rem;
+  font-weight: bold;
+  display: flex;
+  gap: 5px;
+}
+
+div.post p.info a.author {
+  color: #643320;
 }
 
 div.post p.review{
