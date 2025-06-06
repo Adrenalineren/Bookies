@@ -113,18 +113,28 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
-    const {title, review, content} = req.body;
-    const postDoc = await Post.create({
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+        const {title, review, content} = req.body;
+        const postDoc = await Post.create({
         title, 
         review,
         content,
         cover:newPath,
-    })
+        author: info.id,
+        });
     res.json(postDoc);
+    });
 });
 
 app.get('/post', async (req, res) => {
-    res.json(await Post.find());
+    res.json(
+        await Post.find()
+            .populate('author', ['username'])
+            .sort({createdAt: -1})
+            .limit(20)
+    );
 });
 
 app.listen(4000);
