@@ -228,3 +228,28 @@ div.post-page div.author {
   font-size: 0.8rem;
   font-weight: bold;
 }
+
+div.post-page div.content p {
+  line-height: 1.5rem;
+  color: #814b36;
+}
+
+div.edit-row {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+a.edit-btn {
+  background-color: #814b36;
+  color: rgb(219, 209, 173);
+  padding: 5px 15px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 5px;
+  border-radius: 20px;
+}
+
+a svg{
+  height: 18px;
+}
