@@ -121,7 +121,7 @@ div.post p.info{
   font-weight: bold;
 }
 
-/*Styling for vertical nav bar*/
+/*VERTICAL NAV BAR*/
 .vertical-navbar {
   height: 100vh;
   width: 110px;
@@ -155,6 +155,55 @@ div.post p.info{
   height:25px;
   margin-bottom: 5px;
 }
+/* SEARCH BAR */
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  gap: 15px;
+  width: 100%;            
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  background: #f7f1e8;
+  border-radius: 999px;
+  padding: 10px 16px;
+  flex: 1;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  color: #333;
+  margin: 0;
+}
+
+.search-icon {
+  margin-right: 8px;
+  font-size: 17px;
+  color: gray;
+}
+
+.search-button {
+  padding: 16px;
+  border: none;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 14px;
+  max-width: 130px;
+  color: white;
+  background: linear-gradient(90deg, #B7B1F2, #8EACCD);
+  background-size: 300% 300%;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
 
 /*PROFILE PAGE*/
 .profile-container{
@@ -253,3 +302,4 @@ a.edit-btn {
 a svg{
   height: 18px;
 }
+
