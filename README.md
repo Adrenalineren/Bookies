@@ -12,7 +12,18 @@
 **Full Stack:** MERN (MongoDB, Express, React, Node.js)
 
 ---
+## 👩🏻‍💻 Software Engineering Practices
 
+#### 1. Version Control
+Our team uses Git to track changes, collaborate effectively and manage code versions. This allows us to maintain a clear development history, revert to previous versions when needed, and work simultaneously on different features of our web application without conflict.
+ 
+#### 2. Code Readability
+We prioritize code clarity by following consistent naming conventions in our code, such as CamelCase for every variable and function. We also use meaningful and descriptive names to make our code easier to understand and maintain.
+
+#### 3. Modular Design
+In our web application, each component is organized in its own file, keeping the codebase clean and manageable. This structure promotes code reusability, simplifies debugging and enhances maintainability. 
+
+---
 ## 📦 Installation
 
 Follow these steps to run the project locally:
