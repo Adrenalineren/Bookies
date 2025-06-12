@@ -28,6 +28,21 @@ return (
         {postInfo.author && (
             <div className="author">Review by {postInfo.author.username}</div>
         )}
+        {postInfo.genres && (
+            <div className="genres">
+                <strong>Genres: </strong>
+                {Array.isArray(postInfo.genres) 
+                    ? postInfo.genres.join(', ')
+                    : postInfo.genres}
+            </div>
+        )}
+        {postInfo.rating && (
+            <div className="rating">
+                <strong>Rating: </strong>
+                {'★'.repeat(postInfo.rating)}{'☆'.repeat(5 - postInfo.rating)}
+            </div>
+        )}
+
         <div className="image">
             <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
         </div>

@@ -16,7 +16,7 @@ img{
 header{
   display: flex; /* so they appear next to each other */
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-top: 10px;
   align-items: center;
 }
 
@@ -155,12 +155,52 @@ div.post p.info{
   height:25px;
   margin-bottom: 5px;
 }
+
+/* GENRE FILTER */
+.genre-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+}
+
+.genre-button {
+  display: flex;
+  flex-direction: column;
+  background: none;
+  padding: 0px;
+}
+
+.genre-button:hover {
+  transform: scale(1.05);
+}
+
+.genre-icon {
+  width:100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.genre-label {
+  margin-top: 5px;
+  font-size: 10;
+  color: #814b36;
+}
+
+.clear-filter-button {
+  margin-top: 10px;
+  border-radius: 999px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(90deg, #B7B1F2, #8EACCD);
+  background-size: 300% 300%;
+}
 /* SEARCH BAR */
 
 .search-container {
   display: flex;
   align-items: center;
-  margin: 20px;
+  margin: 20px 0px;
   gap: 15px;
   width: 100%;            
 }
@@ -297,6 +337,26 @@ a.edit-btn {
   text-decoration: none;
   gap: 5px;
   border-radius: 20px;
+}
+.genre-option {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+  width: 20%;
+  margin: 0px;
+  font-weight: 400;
+}
+
+.genres-input {
+  font-size: 17px;
+  padding:15px;
+  padding-left: 0px;
+}
+
+.rating-input {
+  font-size: 17px;
+  padding:15px;
+  padding-left: 0px;
 }
 
 a svg{

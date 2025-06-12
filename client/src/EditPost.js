@@ -8,6 +8,8 @@ export default function EditPost() {
     const [review,setReview] = useState('');
     const [content,setContent] = useState('');
     const [files, setFiles] = useState('');
+    const [genre, setGenre] = useState([]);
+    const [rating, setRating] = useState(0);
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
@@ -17,9 +19,20 @@ export default function EditPost() {
                 setTitle(postInfo.title);
                 setContent(postInfo.content);
                 setReview(postInfo.review);
+                setGenre(postInfo.genres || []);
+                setRating(postInfo.rating || 0);
             });
         });
     }, []);
+
+    function handleGenreSelect(ev){
+        const { value, checked } = ev.target;
+        if (checked) {
+            setGenre(prev => [...prev,value]);
+        } else {
+            setGenre(prev => prev.filter(genre => genre != value));
+        }
+    }
 
     async function updatePost(ev) {
         ev.preventDefault();
@@ -28,6 +41,8 @@ export default function EditPost() {
         data.set('review', review);
         data.set('content', content);
         data.set('id', id);
+        data.set('genres', JSON.stringify(genre));
+        data.set('rating', rating);
         if (files?.[0]) {
             data.set('file', files?.[0]);
         }
@@ -51,6 +66,40 @@ export default function EditPost() {
                 placeholder="Title" 
                 value={title} 
                 onChange={ev => setTitle(ev.target.value)} />
+            <div className="genres-input">
+                <span>Genres: </span>
+                {["Fantasy", "Romance", "Fiction", "Non Fiction"].map(g => (
+                <label key={g} className="genre-option">
+                    <input 
+                    type="checkbox" 
+                    checked={genre.includes(g)}
+                    value={g} onChange={handleGenreSelect} 
+                    className="genre-option"/>
+                    <span>{g}</span>
+                </label>
+                ))}
+            </div>
+            <div className="rating-input">
+                <span>Rating: </span>
+                {[1,2,3,4,5].map((star) => (
+                    <label key={star}>
+                    <input type="radio" 
+                    value={star} 
+                    checked = {rating === star}
+                    onChange={() => setRating(star)}
+                    style={{display:"none"}}
+                    required={star ===1}
+                    />
+                    <span style={{ 
+                    cursor: "pointer",
+                    color: star <= rating ? "#ffc107" : "#e4e5e9",
+                    fontSize: "24px"
+                    }}>
+                        ★
+                    </span>
+                    </label>
+                ))}
+            </div>
             <input type="review" 
                 placeholder="Review"
                 value={review}
