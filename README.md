@@ -39,7 +39,7 @@ cd api
 npm install
 npx nodemon index.js
 ```
-This will start the React frontend on http://localhost:3000.
+This runs the Express backend server on http://localhost:4000.
 
 ### 3. Start the frontend
 In a new terminal window:
@@ -48,7 +48,7 @@ cd client
 npm install
 npm start
 ```
-This runs the Express backend server on http://localhost:4000.
+This will start the React frontend on http://localhost:3000.
 
 ---
 
