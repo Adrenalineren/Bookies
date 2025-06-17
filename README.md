@@ -33,16 +33,7 @@ Follow these steps to run the project locally:
 git clone https://github.com/your-username/bookies.git
 cd bookies
 ```
-### 2. Start the frontend
-```bash
-cd client
-npm install
-npm start
-```
-This will start the React frontend on http://localhost:3000.
-
-### 3. Start the backend
-In a new terminal window:
+### 2. Start the backend
 ```bash
 cd api
 npm install
@@ -50,9 +41,18 @@ npx nodemon index.js
 ```
 This runs the Express backend server on http://localhost:4000.
 
+### 3. Start the frontend
+In a new terminal window:
+```bash
+cd client
+npm install
+npm start
+```
+This will start the React frontend on http://localhost:3000.
+
 ---
 
 ## 💡 Usage
 
 Open your browser and go to: http://localhost:3000.
-Sign up or log in.
+Register or log in.
