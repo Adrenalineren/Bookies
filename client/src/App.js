@@ -11,6 +11,7 @@ import { UserContextProvider } from './UserContext';
 import CreateBook from './CreateBook';
 import PostPage from './PostPage';
 import EditPost from './EditPost';
+import ListPage from './ListPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/profile" element = {<ProfilePage/>}/>
           <Route path="/post/:id" element = {<PostPage/>}/>
           <Route path="/edit/:id" element = {<EditPost/>}/>
+          <Route path="/list" element = {<ListPage/>}/>
         </Route>
       </Routes>
     </UserContextProvider>

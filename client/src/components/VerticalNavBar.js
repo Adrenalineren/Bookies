@@ -12,10 +12,10 @@ const VerticalNavBar = () => {
         <img src="/friends.png" alt="Friend icon" className="nav-icon"/>
         <span>Friends</span>
       </a>
-      <a href="#list" className="nav-link">
+      <Link to="/list" className="nav-link">
         <img src="/star.png" alt="star icon" className="nav-icon"/>
         <span>List</span>
-      </a>
+      </Link>
     </div>
   );
 };

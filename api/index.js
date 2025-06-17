@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const Post = require('./models/Post');
+const List = require('./models/List');
 const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
@@ -76,6 +77,8 @@ app.get('/profile', (req,res) => {
 app.post('/logout', (req,res) => {
     res.cookie('token', '').json('ok');
 });
+
+
 
 //To update avatar and bio
 app.put('/profile', async (req,res) => {
@@ -180,6 +183,29 @@ app.get('/post/:id', async (req, res) => {
     const postDoc = await Post.findById(id).populate('author', ['username']);
     res.json(postDoc);
 })
+
+app.post('/list', async (req, res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) return res.status(401).json('you are UNAUTHORISED.');
+        const {items} = req.body;
+        // update existing or create new
+        const listDoc = await List.findOneAndUpdate(
+            {user: info.id},
+            {items},
+            {new: true, upsert:true}
+        );
+    });
+});
+
+app.get('/list', async (req, res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) return res.status(401).json('you are UNAUTHORISED.');
+        const listDoc = await List.findOne({user: info.id});
+        res.json(listDoc || {items: []});
+    });
+});
 
 app.listen(4000);
 

@@ -1,5 +1,6 @@
 *{
   box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 main{
@@ -192,7 +193,7 @@ div.post p.info{
   border-radius: 999px;
   font-weight: bold;
   color: white;
-  background: linear-gradient(90deg, #B7B1F2, #8EACCD);
+  background: linear-gradient(90deg, #7e5b50, #b9af82);
   background-size: 300% 300%;
 }
 /* SEARCH BAR */
@@ -238,7 +239,7 @@ div.post p.info{
   font-size: 14px;
   max-width: 130px;
   color: white;
-  background: linear-gradient(90deg, #B7B1F2, #8EACCD);
+  background: linear-gradient(90deg, #805a4f, #cf9d7c);
   background-size: 300% 300%;
   cursor: pointer;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -361,5 +362,69 @@ a.edit-btn {
 
 a svg{
   height: 18px;
+}
+
+/*LIST PAGE*/
+.list-page {
+  padding: 2rem;
+}
+
+.list-heading {
+  text-align: center;
+}
+
+.book-icon {
+  width: 170px;
+  height: 170px;
+  display: flex;
+  margin-bottom: 0%;
+}
+
+.list-container {
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+.list-row {
+  display: grid;
+  grid-template-columns: auto 1fr;   
+  align-items: center;
+  column-gap: 1rem;                
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background: #EFE4D2;
+  border-radius: 0.5rem;
+}
+
+.list-text {
+  white-space: nowrap;
+}
+
+.draft-row {
+  display: flex;               
+  align-items: center;       
+  padding: 0.75rem 1rem;       
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  background: #fafafa;
+  margin-bottom: 0.5rem;    
+}
+
+.draft-row input {
+  flex: 1;               
+  border: none;               
+  margin: 0;                
+  padding: 0.5rem;           
+  outline: none;             
+  font-size: 1rem;           
+  box-sizing: border-box;     
+  background: transparent;     
+}
+
+.list-checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #61835d;  
+  cursor: pointer;
 }
 
