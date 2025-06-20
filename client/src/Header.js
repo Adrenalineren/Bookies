@@ -34,14 +34,14 @@ export default function Header() {
         {username && (
           <>
             <VerticalNavBar />
-            <Link to="/create">Create new book</Link>
-            <a onClick={logout} >Logout</a>
+            <Link to="/create" className="button-home">Create new book</Link>
+            <a onClick={logout} className="button-home">Logout</a>
           </>
         )}
         {!username && (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/login" className="button-header">Login</Link>
+            <Link to="/register" className="button-header">Register</Link>
           </>
         )}
       </nav>

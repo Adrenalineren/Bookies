@@ -88,7 +88,7 @@ export default function CreateBook() {
             <input type="file" 
                 onChange={ev => setFiles(ev.target.files)}/>
             <Editor value={content} onChange={setContent}/>
-            <button style={{marginTop:'5px'}}>Done!</button>
+            <button className="button-hover" style={{marginTop:'5px'}}>Done!</button>
         </form>
     );
 }

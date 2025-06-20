@@ -45,7 +45,7 @@ export default function RegisterPage() {
         required
         minLength={4}
         />
-      <button>Register</button>
+      <button className="button-hover">Register</button>
     </form>
   );
 }

@@ -104,7 +104,7 @@ const ProfilePage = () => {
                         <label>Bio:</label>
                         <p className="profile-bio">{user.bio}</p>
                     </div>
-                    <button onClick={() => setEditMode(true)}>Edit Profile</button>
+                    <button className= "button-hover" onClick={() => setEditMode(true)}>Edit Profile</button>
                 
                     </>
                 )}
