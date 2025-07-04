@@ -179,6 +179,22 @@ div.post p.info{
   transition: 0.3s;
 }
 
+.chat-nav-link{
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  color: #814b36;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
 .nav-icon {
   width:25px;
   height:25px;
@@ -473,3 +489,105 @@ a svg{
   cursor: pointer;
 }
 
+/*CHAT BOX*/
+.chat{
+  position:fixed;
+  top:0;
+  right:0;
+  height: 100vh;
+  width:300px;
+  background-color: #EFE4D2;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 100;
+}
+
+.open-chat {
+  transform: translateX(0);
+}
+
+.chat-header{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-content{
+  padding: 10px;
+  height: calc(100vh-60px);
+  overflow-y: auto;
+}
+
+.close-chat-button{
+  padding: 5px;
+  width: 50px;
+  background: none;
+  border:none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.chatbox-messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap:0.5rem;
+}
+
+.chatbox-message{
+  max-width: 70%;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.chatbox-message.user {
+  align-self:flex-end;
+  background-color: #cce5ff;
+  text-align:right;
+  line-height: 20px;
+  word-break: break-word;
+}
+
+.chatbox-message.bot {
+  align-self:flex-start;
+  background-color: #e6e6e6;
+  text-align:left;
+}
+
+.chatbox-input-container{
+  display: flex;
+  align-items: center;
+  margin: 20px 0px;
+  gap: 5px;
+  width: 100%;
+}
+
+.chatbox-input {
+  background: #f7f1e8;
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 10px 20px;
+  margin:0;
+  flex: 1;
+}
+
+.chatbox-send-button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 14px;
+  max-width: 100px;
+  color: white;
+  background: linear-gradient(90deg, #805a4f, #cf9d7c);
+  background-size: 300% 300%;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
