@@ -12,6 +12,7 @@ import CreateBook from './CreateBook';
 import PostPage from './PostPage';
 import EditPost from './EditPost';
 import ListPage from './ListPage';
+import ChatBox from './components/ChatBox';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/post/:id" element = {<PostPage/>}/>
           <Route path="/edit/:id" element = {<EditPost/>}/>
           <Route path="/list" element = {<ListPage/>}/>
+          <Route path="/Chat" element = {<ChatBox/>}/>
         </Route>
       </Routes>
     </UserContextProvider>
