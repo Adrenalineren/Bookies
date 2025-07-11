@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({dest: 'uploads/'});
+const uploadAvatar = multer({ dest: 'uploads/' });
 const fs = require('fs');
 //Generate salt for encryption
 const salt = bcrypt.genSaltSync(10); 
@@ -81,21 +82,37 @@ app.post('/logout', (req,res) => {
 
 
 //To update avatar and bio
-app.put('/profile', async (req,res) => {
-    const {token} = req.cookies;
-    const {avatar, bio} = req.body;
-    try {
-        const userDecoded = jwt.verify(token, secret);
-        console.log("Decoded")
-        const updatedUser = await User.findByIdAndUpdate(
-            userDecoded.id,
-            {avatar, bio},
-            {new:true}
-        );
-        res.json(updatedUser);
-    } catch (err) {
-        res.status(401).json('Unauthorized');
+app.put('/profile', uploadAvatar.single('avatar'), async (req,res) => {
+  const { token } = req.cookies;
+  const { bio } = req.body;
+  let avatarPath = null;
+
+  if (req.file) {
+    const { originalname, path } = req.file;
+    const ext = originalname.split('.').pop();
+    const newPath = path + '.' + ext;
+    fs.renameSync(path, newPath);
+    const fileName = newPath.split(/[/\\]/).pop();  
+    avatarPath = '/uploads/' + fileName
+  }
+
+  try {
+    const userDecoded = jwt.verify(token, secret);
+    const updateData = { bio: req.body.bio };
+    if (avatarPath) {
+      updateData.avatar = avatarPath;
     }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userDecoded.id,
+      updateData,
+      { new: true }
+    );
+    res.json(updatedUser);
+  } catch (err) {
+    console.error(err);
+    res.status(401).json('Unauthorized');
+  }
 });
 
 //Get user info to display on profile page

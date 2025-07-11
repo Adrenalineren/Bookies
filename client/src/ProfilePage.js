@@ -14,6 +14,7 @@ const ProfilePage = () => {
     const [editMode, setEditMode] = useState(false); 
     const [tempBio, setBio] = useState('');
     const [tempAvatar, setAvatar] = useState('');
+    const [avatarFile, setAvatarFile] = useState(null);
 
     useEffect(() => {
 
@@ -44,30 +45,35 @@ const ProfilePage = () => {
         });
     }, [userInfo]);
 
+    console.log("Current avatar path:", user.avatar);
      if (!userInfo) {
         return <Navigate to="/login" />;
     }   
 
     const saveChanges = async() => {
-        setUser({
-            ...user,
-            bio: tempBio,
-            avatar: tempAvatar,
-        });
+        const formData = new FormData();
+        formData.append("bio", tempBio);
+        if (avatarFile) {
+            formData.append("avatar", avatarFile);
+        }
+
         setEditMode(false);
 
-        await fetch('http://localhost:4000/profile', {
+        const response = await fetch('http://localhost:4000/profile', {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         credentials: 'include',
-        body: JSON.stringify({
-            bio: tempBio,
-            avatar: tempAvatar,
-        }),
+        body: formData,
         });
 
+        if (response.ok) {
+            const updatedUser = await response.json();
+            setUser({
+                ...user,
+                bio: updatedUser.bio,
+                avatar: updatedUser.avatar,
+            });
+            setAvatarFile(null);
+        }
     };
     
     return (
@@ -78,10 +84,9 @@ const ProfilePage = () => {
                     <h1 className="profile-name">{user.name}</h1>
                     <label>Avatar</label>
                     <input 
-                        type = "text" 
-                        placeholder="Paste an image link here"
-                        value={tempAvatar} 
-                        onChange={(e) => setAvatar(e.target.value)} 
+                        type = "file" 
+                        accept = "image/*"
+                        onChange={(e) => setAvatarFile(e.target.files[0])} 
                         className="edit-input"
                     />
                     <label>Bio</label>
@@ -97,7 +102,7 @@ const ProfilePage = () => {
                 ) : (
                     <>
                     {user.avatar && (
-                        <img src={user.avatar} alt="Profile" className="profile-avatar" />
+                        <img src={`http://localhost:4000${user.avatar}`} alt="Profile" className="profile-avatar" />
                     )}
                     <h1 className="profile-name">{user.name}</h1>
                     <div className="bio">
@@ -109,7 +114,7 @@ const ProfilePage = () => {
                     </>
                 )}
         </div>
-    );
+    );   
 };
 
 export default ProfilePage;

@@ -298,6 +298,7 @@ div.post p.info{
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #ccc;
+  display: block;
   margin: 0;
 }
 
