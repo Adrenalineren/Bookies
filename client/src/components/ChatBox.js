@@ -3,18 +3,30 @@ const ChatBox = () => {
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([]);
 
-    const sendMessage = () => {
+    const sendMessage = async () => {
         if(!input.trim()) return;
 
         const newMessages = [...messages, {sender: "user", text:input}];
         setMessages(newMessages);
         setInput("");
 
-        setTimeout(() => {
-            setMessages((prev) => [...prev, {sender: "bot", text:"Heres a book"}]);
+        try {
+            const response = await fetch("http:////localhost:4000/chat",{
+                method:"POST",
+                headers : {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({messages:input}),
+            });
+            const data = await response.json();
+            setMessages((prev) => [...prev, {sender: "bot", text:data.reply}]);
 
-        }, 500);
-    }
+        } catch (error) {
+            setMessages((prev) => [...prev, { sender: "bot", text: "Sorry, no response." }]);
+            console.error("Error calling backend:", error);
+        }
+
+    };
 
 
     return (
