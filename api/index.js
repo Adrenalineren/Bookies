@@ -12,10 +12,13 @@ const multer = require('multer');
 const uploadMiddleware = multer({dest: 'uploads/'});
 const uploadAvatar = multer({ dest: 'uploads/' });
 const fs = require('fs');
+const fetch = require('node-fetch');
+const dotenv = require('dotenv');
+dotenv.config();
+
 //Generate salt for encryption
 const salt = bcrypt.genSaltSync(10); 
 const secret = 'andowneiaosnqsdmvow';
-
 app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
@@ -201,6 +204,7 @@ app.get('/post/:id', async (req, res) => {
     res.json(postDoc);
 })
 
+//For Booklist 
 app.post('/list', async (req, res) => {
     const {token} = req.cookies;
     jwt.verify(token, secret, {}, async (err, info) => {
@@ -224,6 +228,43 @@ app.get('/list', async (req, res) => {
     });
 });
 
+
+//For Chat function
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`;
+
+app.post('/chat', async (req, res) => {
+    const { messages } = req.body;
+    console.log("Incoming message:", messages);
+
+    try {
+        const response = await fetch(GEMINI_API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        parts: [
+                            { 
+                                text: messages
+                            }
+                        ],
+                    },
+                ],
+            }),
+        });
+        const data = await response.json();
+        console.log("Gemini API response:", data);
+
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, no reply.";
+        res.json({ reply });
+
+    } catch (error) {
+        console.error("GEMINI API:", error);
+        res.status(500).json({reply: 'Sorry, something went wrong.'});
+    }
+});
 app.listen(4000);
 
 //mongodb+srv://admin:Bookiesadmin123@cluster0.gxfpsx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
