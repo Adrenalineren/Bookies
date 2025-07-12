@@ -533,6 +533,7 @@ a svg{
 .chatbox-messages {
   display: flex;
   flex-direction: column;
+  height: 75vh;
   overflow-y: auto;
   gap:0.5rem;
 }
