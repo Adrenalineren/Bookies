@@ -593,3 +593,14 @@ a svg{
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 }
+
+.search-section{
+  margin-top: 1cm;
+}
+
+
+.friends-icon {
+  display: flex;
+  margin-bottom: 0%;
+  margin-top: 0.7cm;
+}

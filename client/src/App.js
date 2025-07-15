@@ -13,6 +13,7 @@ import PostPage from './PostPage';
 import EditPost from './EditPost';
 import ListPage from './ListPage';
 import ChatBox from './components/ChatBox';
+import FriendsPage from './FriendsPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/edit/:id" element = {<EditPost/>}/>
           <Route path="/list" element = {<ListPage/>}/>
           <Route path="/Chat" element = {<ChatBox/>}/>
+          <Route path="/friends" element = {<FriendsPage/>}/>
         </Route>
       </Routes>
     </UserContextProvider>
