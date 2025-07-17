@@ -15,13 +15,38 @@ export default function FriendsPage() {
             .then(res => res.json())
             .then(data => setFriends(data));
     }, []);
-    
+   
+    /*
     const handleSearch = () => {
         fetch(`https://localhost:4000/search-users?query=${search}`, {
             credentials: 'include',
         })
             .then(res => res.json())
             .then(data => setResults(data));
+    };
+    */
+
+    const handleSearch = async () => {
+        const url = `http://localhost:4000/search-users?query=${encodeURIComponent(search)}`;
+        console.log("Searching users at:", url);
+
+        try {
+            const res = await fetch(url, {
+            credentials: 'include',
+        });
+        console.log("Fetch response:", res);
+
+        if (!res.ok) {
+            console.error("Response not OK:", res.status, res.statusText);
+            return;
+        }
+
+        const data = await res.json();
+        console.log("Search results:", data);
+        setResults(data);
+        } catch (err) {
+            console.error("handleSearch failed:", err);
+        }
     };
 
     const addFriend = (friendId) => {
@@ -34,6 +59,8 @@ export default function FriendsPage() {
             .then(res => res.json())
             .then(updated => setFriends(updated));
     }
+
+    if (!userInfo) return <p>Please log in.</p>;
 
     return (
         <div className="friends=page">
@@ -52,7 +79,7 @@ export default function FriendsPage() {
                     <div key={user._id} className="user-result">
                         <img src={`http://localhost:4000${user.avatar}`} alt = "avatar" width={50} height={50}/>
                         <span>{user.username}</span>
-                        <button onClick={() => addFriend(user._id)}>Add Friend</button>
+                        <button className="butt-on" onClick={() => addFriend(user._id)}>Add Friend</button>
                     </div>
                 ))}
             </div>

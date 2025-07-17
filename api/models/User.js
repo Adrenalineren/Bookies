@@ -5,6 +5,7 @@ const UserSchema = new Schema({
     password : {type:String, required:true},
     avatar: {type: String, default: "/default-avatar.png"},
     bio : {type:String, default: ""},
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
 const UserModel = model('User', UserSchema);

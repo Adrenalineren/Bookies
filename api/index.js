@@ -265,6 +265,44 @@ app.post('/chat', async (req, res) => {
         res.status(500).json({reply: 'Sorry, something went wrong.'});
     }
 });
+
+app.get('/search-users', async (req, res) => {
+    const {query} = req.query;
+    if (!query) return res.json([]);
+
+    const users = await User.find({
+        username: {$regex: new RegExp(query, 'i')},  
+    }).select('username avatar');
+
+    res.json(users);
+});
+
+app.post('/add-friend', async (req, res) => {
+    const {token} = req.cookies;
+    const {friendId} = req.body;
+
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) return res.status(401).json('Unauthorised');
+
+        const me = await User.findById(info.id);
+        if (!me.friends.includes(friendId)) {
+            me.friends.push(friendId);
+            await me.save();
+        }
+        const friends = await User.find({_id: {$in: me.friends}}).select('username avatar');
+        res.json(friends);
+    });
+});
+
+app.get('/friends', async (req, res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async(err, info) => {
+        if (err) return res.status(401).json('Unauthorised');
+        const user = await User.findById(info.id).populate('friends', 'username avatar');
+        res.json(user.friends);
+    });
+});
+
 app.listen(4000);
 
 //mongodb+srv://admin:Bookiesadmin123@cluster0.gxfpsx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
