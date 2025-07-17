@@ -14,18 +14,23 @@ const uploadAvatar = multer({ dest: 'uploads/' });
 const fs = require('fs');
 const fetch = require('node-fetch');
 const dotenv = require('dotenv');
+const path = require('path');
+
 dotenv.config();
+
+//To load default profile picture
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Generate salt for encryption
 const salt = bcrypt.genSaltSync(10); 
-const secret = 'andowneiaosnqsdmvow';
+const secret = process.env.JWT_SECRET;
 app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 //Connect to database
-mongoose.connect('mongodb+srv://admin:Bookiesadmin123@cluster0.gxfpsx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect(process.env.MONGO_URI);
 
 //For register
 app.post('/register', async (req,res) => {
@@ -211,11 +216,16 @@ app.post('/list', async (req, res) => {
         if (err) return res.status(401).json('you are UNAUTHORISED.');
         const {items} = req.body;
         // update existing or create new
-        const listDoc = await List.findOneAndUpdate(
-            {user: info.id},
-            {items},
-            {new: true, upsert:true}
-        );
+        try {
+            const listDoc = await List.findOneAndUpdate(
+                {user: info.id},
+                {items},
+                {new: true, upsert:true}
+            );
+            return res.json(listDoc);
+        } catch (error) {
+            return res.status(500).json({ error: 'Failed to update list' });
+        }
     });
 });
 

@@ -20,16 +20,6 @@ const ProfilePage = () => {
 
         if (!userInfo) return;
 
-        /*
-        setUser({
-            name: userInfo.username || '',
-            bio: userInfo.bio || "",
-            avatar: userInfo.avatar || "",
-        });
-        setBio(userInfo.bio || "");
-        setAvatar(userInfo.avatar || "");
-        */
-
         fetch('http://localhost:4000/user',{
             credentials: 'include',
         })
@@ -97,7 +87,7 @@ const ProfilePage = () => {
                         onChange={(e) => setBio(e.target.value)}
                         className="edit-input"
                     />
-                    <button onClick={saveChanges}>Save</button>
+                    <button onClick={saveChanges} className="profile-save-button">Save</button>
                     </>
                 ) : (
                     <>

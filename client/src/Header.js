@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect} from "react";
 import { UserContext } from "./UserContext";
 import VerticalNavBar from "./components/VerticalNavBar";
 
 
 export default function Header() {
   const {setUserInfo, userInfo} = useContext(UserContext);
+  const navigate = useNavigate();
   useEffect(() => {
     fetch('http://localhost:4000/profile', {
       credentials: 'include',
@@ -23,6 +23,7 @@ export default function Header() {
       method: 'POST',
     });
     setUserInfo(null);
+    navigate('/');
   }
 
   const username = userInfo?.username;

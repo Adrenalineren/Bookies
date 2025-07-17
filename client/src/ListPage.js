@@ -1,8 +1,10 @@
-import { useEffect, useContext, useState} from "react";
+import { useEffect, useRef, useState} from "react";
 
 export default function ListPage() {
     const [items, setItems] = useState([]);
     const [draft, setDraft] = useState('');
+
+    const firstLoad = useRef(true);
 
     const handleKeyDown = e => {
         if (e.key === 'Enter' && draft.trim() !== '') {
@@ -35,11 +37,12 @@ export default function ListPage() {
         if (data && data.items) {
           setItems(data.items);
         }
+        firstLoad.current = false;
       });
   }, []);
 
   useEffect(() => {
-    if (items.length === 0) return;
+    if (firstLoad.current) return;
     fetch('http://localhost:4000/list', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
