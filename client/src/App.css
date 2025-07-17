@@ -449,7 +449,7 @@ a svg{
 
 .list-row {
   display: grid;
-  grid-template-columns: auto 1fr;   
+  grid-template-columns: auto 1fr auto;   
   align-items: center;
   column-gap: 1rem;                
   padding: 0.75rem 1rem;
@@ -457,9 +457,43 @@ a svg{
   background: #EFE4D2;
   border-radius: 0.5rem;
 }
+.list-checkbox {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  appearance: none;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.list-checkbox:checked {
+  background-color: #7d5a50;
+}
+
+.list-checkbox:checked::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%, -50%);
+}
+
 
 .list-text {
   white-space: nowrap;
+}
+
+.list-delete-button {
+  padding: 5px;
+  margin-left: 10px;
+  background: none;
+  border:none;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .draft-row {

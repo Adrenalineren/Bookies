@@ -1,5 +1,4 @@
 import { useEffect, useContext, useState} from "react";
-import { UserContext } from "./UserContext";
 
 export default function ListPage() {
     const [items, setItems] = useState([]);
@@ -21,6 +20,10 @@ export default function ListPage() {
             i === idx ? { ...it, checked: !it.checked } : it
             )
         );
+    };
+
+    const deleteItem = (idxToDelete) => {
+      setItems((prev) => prev.filter((_, i) => i !== idxToDelete));
     };
 
   useEffect(() => {
@@ -59,6 +62,11 @@ export default function ListPage() {
               onChange={() => toggleChecked(idx)}
             />
             <span className="list-text">{item.text}</span>
+            <button
+              className="list-delete-button"
+              onClick={() => deleteItem(idx)}
+              >✖
+              </button>
           </div>
         ))}
 
