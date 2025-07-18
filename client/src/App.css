@@ -204,16 +204,26 @@ div.post p.info{
 /* GENRE FILTER */
 .genre-filter {
   display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
   margin-top: 10px;
+  padding: 10px;
+  gap: 1rem;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.genre-filter::-webkit-scrollbar {
+  display: none;
 }
 
 .genre-button {
   display: flex;
   flex-direction: column;
   background: none;
+  border: none;
   padding: 0px;
+  cursor: pointer;
 }
 
 .genre-button:hover {
@@ -511,6 +521,13 @@ a svg{
   border:none;
   font-size: 1.2rem;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.list-delete-button:hover {
+  background-color: #EFE4D2;
+  color: burlywood;
+  transform: scale(1.02);
 }
 
 .draft-row {

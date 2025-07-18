@@ -1,10 +1,16 @@
 
 
 const genreIcons = {
-  Fantasy: "/FantasyBook.png",
-  Romance: "/RomanceBook.png",
   Fiction: "/FictionBook.png",
-  "Non Fiction": "/NonFictionBook.png"
+  "Non Fiction": "/NonFictionBook.png",
+  Romance: "/RomanceBook.png",
+  Fantasy: "/FantasyBook.png",
+  Mystery: "/MysteryBook.png",
+  Horror: "/HorrorBook.png",
+  History: "/HistoryBook.png",
+  Poetry: "/PoetryBook.png",
+  "Science Fiction": "/ScienceFictionBook.png",
+  Academia: "/AcademiaBook.png",
 };
 
 export default function GenreFilter( {selectedGenre, onSelect}) {

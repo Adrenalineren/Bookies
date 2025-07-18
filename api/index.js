@@ -313,6 +313,29 @@ app.get('/friends', async (req, res) => {
     });
 });
 
+app.get('/friend/:id', async (req, res) => {
+    const {id} = req.params;
+    try {
+        const friend = await User.findById(id, '-password');
+        const posts = await Post.find({author: id}).sort({createdAt : -1});
+        res.json({friend, posts});
+    } catch (err) {
+        res.status(500).json({error: 'Failed to load friend profile'});
+    }
+});
+
+app.post('/unfriend/:id', async (req, res) => {
+    const { id } = req.params;
+    const myId = req.session.user._id;
+    try {
+        await User.findByIdAndUpdate(myId, {$pull: {friends: id}});
+        await User.findByIdAndUpdate(id, {$pull: {friends: myId}});
+        res.json({success: true});
+    } catch (err) {
+        res.status(500).json({success: false, error: err.message});
+    }
+})
+
 app.listen(4000);
 
 //mongodb+srv://admin:Bookiesadmin123@cluster0.gxfpsx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "./UserContext";
+import {Link} from "react-router-dom";
 
 export default function FriendsPage() {
     const { userInfo } = useContext(UserContext);
@@ -89,10 +90,15 @@ export default function FriendsPage() {
             <h2>Your Friends</h2>
             <div className="friends-list">
                 {friends.map(friends => (
-                    <div key={friends._id} className="friend-card">
-                        <img src={`http://localhost:4000${friends.avatar}`} alt="avatar" width={60} height={60}/>
-                        <div>{friends.username}</div>
-                    </div>
+                    <Link 
+                        to = {`/friends/${friends._id}`}
+                        key={friends._id}
+                        style={{textDecoration: 'none', color:'inherit'}}>
+                        <div className="friend-card">
+                            <img src={`http://localhost:4000${friends.avatar}`} alt="avatar" width={60} height={60}/>
+                            <div>{friends.username}</div>
+                        </div>
+                    </Link>
                 ))}
             </div>
         </div>

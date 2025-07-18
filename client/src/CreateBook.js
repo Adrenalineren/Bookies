@@ -53,7 +53,7 @@ export default function CreateBook() {
                 onChange={ev => setTitle(ev.target.value)} />
             <div className="genres-input">
                 <span>Genres: </span>
-                {["Fantasy", "Romance", "Fiction", "Non Fiction"].map(genre => (
+                {["Fiction", "Non Fiction", "Fantasy", "Romance", "Mystery", "Horror", "History", "Poetry", "Science Fiction", "Academia"].map(genre => (
                 <label key={genre} className="genre-option">
                     <input type="checkbox" value={genre} onChange={handleGenreSelect} className="genre-option"/>
                     <span>{genre}</span>
