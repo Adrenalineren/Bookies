@@ -50,7 +50,7 @@ export default function FriendProfilePage() {
                     </li>
                 ))}
             </ul>
-            <button onClick={handleUnfriend}>Unfriend</button>
+            <button className= "button-hover" onClick={handleUnfriend}>Unfriend</button>
         </div>
     )
 }

@@ -485,7 +485,7 @@ a svg{
   column-gap: 1rem;                
   padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
-  background: #EFE4D2;
+  background: #dfcbab;
   border-radius: 0.5rem;
 }
 .list-checkbox {
@@ -750,3 +750,6 @@ a svg{
   margin-bottom: 0.5rem;
 }
 
+.friend-profile-page {
+  color: rgb(173, 147, 113);
+}
