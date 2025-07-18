@@ -3,6 +3,11 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+body {
+  background-color: #EFE9DC;
+  color: #8D765A;
+}
+
 main{
   padding: 10px;
   max-width: 650px;
@@ -12,6 +17,30 @@ main{
 img{
   max-width: 250px;
   margin: 0 auto;
+}
+
+label {
+  font-weight: 600;
+  color: #AB9477;
+  padding: 0.5rem;
+}
+
+input{
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 5px;
+  border: 0;
+  background-color: #DFD6C2;
+  border-radius: 5px;
+}
+
+button{
+  width: 100%;
+  display: block;
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 0;
 }
 
 header{
@@ -29,7 +58,7 @@ header a{
 header a.logo{
   font-weight: bolder;
   font-size: 0.7cm;
-  color: rgb(102, 84, 63);
+  color: #8D765A;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -44,12 +73,12 @@ header a.logo:hover{
 header nav{
   display: flex;
   gap: 15px;
-  color: rgb(102, 84, 63);
+  color: #8D765A;
   font-weight: bold;
 }
 
 .button-hover {
-  background-color: #9e774f;
+  background-color: #AB9477;
   color: white;
   padding: 0.6rem 1.2rem;
   font-size: 1rem;
@@ -60,7 +89,7 @@ header nav{
 }
 
 .button-hover:hover {
-  background-color: #966a44;  /* darker on hover */
+  background-color: #8D765A;  /* darker on hover */
   transform: scale(1.02);     /* grow slightly */
 }
 
@@ -82,7 +111,7 @@ div.post{
 div.post div.texts h3{
   font-size: 1.2rem;
   margin: 0;
-  color: #7a422c;
+  color: #8D765A;
 }
 
 div.post div.texts a {
@@ -91,15 +120,16 @@ div.post div.texts a {
 
 div.post p.info{
   margin: 0;
-  color: #805847;
-  font-size: 7rem;
+  color: #8D765A;
+  font-size: .7rem;
   font-weight: bold;
   display: flex;
   gap: 5px;
+
 }
 
-div.post p.info a.author {
-  color: #643320;
+div.post a.author {
+  color: #8D765A;
 }
 
 div.post p.review{
@@ -113,41 +143,8 @@ form.login, form.register{
   margin: 0 auto;
 }
 
-label {
-  font-weight: 600;
-  color: #814b36;
-  padding: 0.5rem;
-}
-
-input{
-  display: block;
-  margin-bottom: 5px;
-  width: 100%;
-  padding: 5px;
-  border: 0;
-  background-color: rgb(236, 209, 174);
-  border-radius: 5px;
-}
-
-button{
-  width: 100%;
-  display: block;
-  background-color: #814b36 ;
-  color: rgb(219, 209, 173);
-  border: 0;
-  border-radius: 5px;
-  padding: 7px 0;
-}
-
 form.login h1, form.register h1{
   text-align: center;
-}
-
-div.post p.info{
-  margin: 0;
-  color: #814b36;
-  font-size: .7rem;
-  font-weight: bold;
 }
 
 /*VERTICAL NAV BAR*/
@@ -159,10 +156,20 @@ div.post p.info{
   top: 0;
   left: 0;
   align-items: center;
-  background-color: #EFE4D2;
+  background-color: #DFD6C2;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.icon-circle {
+  background-color: #EFE9DC;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-link {
@@ -170,12 +177,10 @@ div.post p.info{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px 0;
+  padding: 10px 0;
   font-size: 15px;
   width: 100%;
   text-align: center;
-  color: #814b36;
-  text-decoration: none;
   transition: 0.3s;
 }
 
@@ -185,20 +190,18 @@ div.post p.info{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px 0;
+  padding: 10px 0;
   font-size: 15px;
   font-weight: bold;
   width: 100%;
-  text-align: center;
-  color: #814b36;
-  text-decoration: none;
   transition: 0.3s;
 }
 
 .nav-icon {
   width:25px;
   height:25px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
+  transition: opacity 0.3s ease-in;
 }
 
 /* GENRE FILTER */
@@ -239,7 +242,7 @@ div.post p.info{
 .genre-label {
   margin-top: 5px;
   font-size: 10;
-  color: #814b36;
+  color: #AB9477;
 }
 
 .clear-filter-button {
@@ -268,7 +271,8 @@ div.post p.info{
 .search-input-box {
   display: flex;
   align-items: center;
-  background: #f7f1e8;
+  background: radial-gradient(#EFE9DC , #DFD6C2);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1); 
   border-radius: 999px;
   padding: 10px 16px;
   flex: 1;
@@ -280,7 +284,7 @@ div.post p.info{
   outline: none;
   font-size: 16px;
   width: 100%;
-  color: #333;
+  color: #7d5a50;
   margin: 0;
 }
 
@@ -298,7 +302,7 @@ div.post p.info{
   font-size: 14px;
   max-width: 130px;
   color: white;
-  background: linear-gradient(90deg, #805a4f, #cf9d7c);
+  background: linear-gradient(90deg, #AB9477, #DFD6C2);
   background-size: 300% 300%;
   cursor: pointer;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -349,7 +353,7 @@ div.post p.info{
 }
 
 .edit-input:focus {
-  border-color: #007bff;
+  border-color: #AB9477;
   outline: none;
 }
 
@@ -362,7 +366,7 @@ div.post p.info{
   font-size: 14px;
   max-width: 130px;
   color: white;
-  background: linear-gradient(90deg, #805a4f, #cf9d7c);
+  background: linear-gradient(90deg, #AB9477, #DFD6C2);
   background-size: 300% 300%;
   cursor: pointer;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -390,20 +394,20 @@ div.post-page time {
   text-align: center;
   display: block;
   font-size: 0.8rem;
-  color: #997363;
+  color: #BEAC94;
 }
 
 div.post-page div.author {
   text-align: center;
   margin-bottom: 20px;
-  color: #997363;
+  color: #BEAC94;
   font-size: 0.8rem;
   font-weight: bold;
 }
 
 div.post-page div.content p {
   line-height: 1.5rem;
-  color: #814b36;
+  color: #8D765A;
 }
 
 div.edit-row {
@@ -412,8 +416,8 @@ div.edit-row {
 }
 
 a.edit-btn {
-  background-color: #814b36;
-  color: rgb(219, 209, 173);
+  background-color: #AB9477;
+  color: white;
   padding: 5px 15px;
   display: inline-flex;
   align-items: center;
@@ -425,7 +429,7 @@ a.edit-btn {
 }
 
 a.edit-btn:hover {
-  background-color: #815e3f;  
+  background-color: #8D765A;  
   transform: scale(1.02);
 }
 .genre-option {
@@ -497,7 +501,7 @@ a svg{
 }
 
 .list-checkbox:checked {
-  background-color: #7d5a50;
+  background-color: #8D765A;
 }
 
 .list-checkbox:checked::after {
@@ -515,6 +519,7 @@ a svg{
 }
 
 .list-delete-button {
+  color: #BEAC94; 
   padding: 5px;
   margin-left: 10px;
   background: none;
@@ -526,7 +531,7 @@ a svg{
 
 .list-delete-button:hover {
   background-color: #EFE4D2;
-  color: burlywood;
+  color: #AB9477;
   transform: scale(1.02);
 }
 
@@ -565,7 +570,7 @@ a svg{
   right:0;
   height: 100vh;
   width:300px;
-  background-color: #EFE4D2;
+  background-color: #DFD6C2;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
@@ -590,6 +595,7 @@ a svg{
 }
 
 .close-chat-button{
+  color: #BEAC94;
   padding: 5px;
   width: 50px;
   background: none;
@@ -655,7 +661,7 @@ a svg{
   font-size: 14px;
   max-width: 100px;
   color: white;
-  background: linear-gradient(90deg, #805a4f, #cf9d7c);
+  background: linear-gradient(90deg, #AB9477, #DFD6C2);
   background-size: 300% 300%;
   cursor: pointer;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -690,10 +696,12 @@ a svg{
   align-self: center;
 }
 
+/*
 .butt-on:hover {
   background-color: #815e3f;  
   transform: scale(1.02);
 }
+  */
 
 .user-result {
   text-align: center;
@@ -708,7 +716,7 @@ a svg{
   height: 80px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #815e3f;
+  border: 2px solid #ab9477;
   margin-bottom: 0.5rem;
 }
 
@@ -738,7 +746,7 @@ a svg{
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #815e3f;
+  border: 2px solid #BEAC94;
   margin-bottom: 0.5rem;
 }
 

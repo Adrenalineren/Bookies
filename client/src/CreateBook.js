@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {Navigate} from 'react-router-dom';
 import Editor from "./Editor";
@@ -47,6 +46,7 @@ export default function CreateBook() {
     }
     return(
         <form onSubmit={createNewPost}>
+            <span>Title: </span>
             <input type="title" 
                 placeholder="Title" 
                 value={title} 
@@ -73,7 +73,7 @@ export default function CreateBook() {
                     />
                     <span style={{ 
                     cursor: "pointer",
-                    color: star <= rating ? "#ffc107" : "#e4e5e9",
+                    color: star <= rating ? "#ffc107" : "#ffffff",
                     fontSize: "24px"
                     }}>
                         ★
@@ -81,12 +81,15 @@ export default function CreateBook() {
                     </label>
                 ))}
             </div>
+            <span>Review: </span>
             <input type="review" 
                 placeholder="Review"
                 value={review}
                 onChange={ev => setReview(ev.target.value)} />
+            <span>Book Cover: </span>
             <input type="file" 
                 onChange={ev => setFiles(ev.target.files)}/>
+            <span>About Book: </span>
             <Editor value={content} onChange={setContent}/>
             <button className="button-hover" style={{marginTop:'5px'}}>Done!</button>
         </form>
