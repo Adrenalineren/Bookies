@@ -325,16 +325,22 @@ app.get('/friend/:id', async (req, res) => {
 });
 
 app.post('/unfriend/:id', async (req, res) => {
+    const {token} = req.cookies;
     const { id } = req.params;
-    const myId = req.session.user._id;
-    try {
-        await User.findByIdAndUpdate(myId, {$pull: {friends: id}});
-        await User.findByIdAndUpdate(id, {$pull: {friends: myId}});
-        res.json({success: true});
-    } catch (err) {
-        res.status(500).json({success: false, error: err.message});
-    }
-})
+    
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) return res.status(401).json('Unauthorised');
+
+        try {
+            const myId = info.id;
+            await User.findByIdAndUpdate(myId, {$pull: {friends: id}});
+            await User.findByIdAndUpdate(id, {$pull: {friends: myId}});
+            res.json({success: true});
+        } catch (err) {
+            res.status(500).json({success:false, error: err.message});
+        }
+    });
+});
 
 app.listen(4000);
 

@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "./UserContext";
 
 export default function FriendProfilePage() {
     const {friendId} = useParams();
@@ -23,25 +24,36 @@ export default function FriendProfilePage() {
         fetchFriendData();
     }, [friendId]);
     
-    const handleUnfriend = async (friendId) => {
+    const {userInfo: user} = useContext(UserContext);
+    const handleUnfriend = async () => {
         try {
-            await fetch (`http://localhost:4000/unfriend/${friendId}`, {
+            const res = await fetch (`http://localhost:4000/unfriend/${friendId}`, {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 credentials: 'include',
+                body: JSON.stringify({userId: user._id}),
             });
-            navigate('/friends');
+
+            if (res.ok) {
+                navigate('/friends');
+            } else {
+                console.error('Unfriend failed');
+            }
         } catch (err) {
-            console.error('Unfriending failed:', err);
+            console.error(err);
         }
     };
+    
+
 
     if (!friend) return <div>Loading friend profile...</div>
 
     return (
         <div className="friend-profile-page">
-            <h1>{friend.username}</h1>
+            <h2>{friend.username}'s book reviews</h2>
             <p>Bio: {friend.bio}</p>
-            <h2>{friend.username}'s Book Reviews</h2>
             <ul className="book-posts">
                 {posts.map(post => (
                     <li key={post._id} className="book-post">
