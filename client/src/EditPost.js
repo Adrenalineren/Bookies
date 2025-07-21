@@ -68,7 +68,7 @@ export default function EditPost() {
                 onChange={ev => setTitle(ev.target.value)} />
             <div className="genres-input">
                 <span>Genres: </span>
-                {["Fantasy", "Romance", "Fiction", "Non Fiction"].map(g => (
+                {["Fiction", "Non Fiction", "Fantasy", "Romance", "Mystery", "Horror", "History", "Poetry", "Science Fiction", "Academia"].map(g => (
                 <label key={g} className="genre-option">
                     <input 
                     type="checkbox" 

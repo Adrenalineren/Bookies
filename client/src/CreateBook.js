@@ -83,13 +83,13 @@ export default function CreateBook() {
             </div>
             <span>Review: </span>
             <input type="review" 
-                placeholder="Review"
+                placeholder="Review (No Spoilers here!)"
                 value={review}
                 onChange={ev => setReview(ev.target.value)} />
             <span>Book Cover: </span>
             <input type="file" 
                 onChange={ev => setFiles(ev.target.files)}/>
-            <span>About Book: </span>
+            <span>Reflection/Summary of Book - spoilers are welcome: </span>
             <Editor value={content} onChange={setContent}/>
             <button className="button-hover" style={{marginTop:'5px'}}>Done!</button>
         </form>
