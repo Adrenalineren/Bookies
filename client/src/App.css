@@ -43,6 +43,7 @@ button{
   padding: 7px 0;
 }
 
+
 header{
   display: flex; /* so they appear next to each other */
   justify-content: space-between;
@@ -411,11 +412,13 @@ div.post-page div.content p {
 }
 
 div.edit-row {
-  text-align: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
   margin-top: 1rem;
 }
 
-a.edit-btn {
+a.edit-btn, .delete-btn {
   background-color: #AB9477;
   color: white;
   padding: 5px 15px;
@@ -426,17 +429,22 @@ a.edit-btn {
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
+  justify-content: center;
+  width: 100px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-a.edit-btn:hover {
+a.edit-btn:hover, .delete-btn:hover {
   background-color: #8D765A;  
   transform: scale(1.02);
 }
+
 .genre-option {
   display: flex;
   align-items: center;
   padding: 0px;
-  width: 20%;
+  width: 25%;
   margin: 0px;
   font-weight: 400;
 }

@@ -209,6 +209,12 @@ app.get('/post/:id', async (req, res) => {
     res.json(postDoc);
 })
 
+app.delete('/post/:id', async (req,res) =>{
+    const {id} = req.params;
+    await Post.findByIdAndDelete(id);
+    res.json({success:true});
+})
+
 //For Booklist 
 app.post('/list', async (req, res) => {
     const {token} = req.cookies;

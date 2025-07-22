@@ -19,6 +19,23 @@ export default function PostPage() {
 
     if (!postInfo) return '';
 
+    function handleDelete() {
+        const confirmed = window.confirm("Are you sure you want to delete the review?")
+        if (!confirmed) return;
+
+        fetch(`http://localhost:4000/post/${id}`,{
+            method: 'DELETE',
+            credentials: 'include',   
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                alert('Failed to delete the review.')
+            }
+        });
+    }
+
+
 return (
     <div className="post-page">
         <h1>{postInfo.title}</h1>
@@ -54,6 +71,19 @@ return (
                     </svg>
                     Edit
                 </Link>
+
+                <button className="delete-btn" onClick={handleDelete}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                        viewBox="0 0 24 24" strokeWidth={1.5} 
+                        stroke="currentColor" className="size-6" 
+                        width="20" height="20">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 7h12M9 7V4.5a1.5 1.5 0 0 1 
+                        1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5V7m-6 0h6m1.5 0v12a2.25 
+                        2.25 0 0 1-2.25 2.25H8.25A2.25 2.25 0 0 1 6 
+                        19.5V7h12z" />
+                    </svg>
+                    Delete
+                </button>
             </div>
         )}
         <div className= "content" dangerouslySetInnerHTML={{ __html: postInfo.content }} />

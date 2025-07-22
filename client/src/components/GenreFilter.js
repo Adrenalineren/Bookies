@@ -20,8 +20,8 @@ export default function GenreFilter( {selectedGenre, onSelect}) {
                 <button
                 key={genre}
                 onClick={() => onSelect(genre)}
-                className={`genre-button ${selectedGenre == genre ? "selected" : ''}`}>
-                    <img src={icon} className="genre-icon"/>
+                className={`genre-button ${selectedGenre === genre ? "selected" : ''}`}>
+                    <img src={icon} alt="genre-icon" className="genre-icon"/>
                     <span className="genre-label">{genre}</span>
                 </button>
             ))}
