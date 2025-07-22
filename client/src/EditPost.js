@@ -62,6 +62,7 @@ export default function EditPost() {
 
     return(
         <form onSubmit={updatePost}>
+            <span>Title: </span>
             <input type="title" 
                 placeholder="Title" 
                 value={title} 
@@ -100,12 +101,15 @@ export default function EditPost() {
                     </label>
                 ))}
             </div>
+            <span>Review: </span>
             <input type="review" 
                 placeholder="Review"
                 value={review}
                 onChange={ev => setReview(ev.target.value)} />
+            <span>Book Cover: </span>
             <input type="file" 
                 onChange={ev => setFiles(ev.target.files)}/>
+            <span>Reflection/Summary of Book - spoilers are welcome: </span>
             <Editor onChange={setContent} value={content}/>
             <button className="button-hover" style={{marginTop:'5px'}}>Update!</button>
         </form>
