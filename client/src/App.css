@@ -27,9 +27,10 @@ label {
 
 input{
   display: block;
+  margin-top: 5px;
   margin-bottom: 5px;
   width: 100%;
-  padding: 5px;
+  padding: 7px;
   border: 0;
   background-color: #DFD6C2;
   border-radius: 5px;
@@ -79,9 +80,12 @@ header nav{
 }
 
 .button-hover {
+  display: inline-block;
   background-color: #AB9477;
   color: white;
   padding: 0.6rem 1.2rem;
+  margin-top: 7px;
+  margin-bottom: 5px;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
@@ -146,6 +150,17 @@ form.login, form.register{
 
 form.login h1, form.register h1{
   text-align: center;
+}
+
+.signup-text {
+  color: #AB9477;
+}
+
+
+.signup-link{
+  color: #8D765A;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 /*VERTICAL NAV BAR*/

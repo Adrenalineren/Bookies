@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import {useState} from "react";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 export default function LoginPage() {
@@ -32,17 +32,22 @@ export default function LoginPage() {
     return (
         <form className="login" onSubmit={login}>
             <h1>Login</h1>
+            <label>Username</label>
             <input type="text" 
-                placeholder="username"
+                placeholder="Enter your username"
                 value = {username}
                 onChange = {ev => setUsername(ev.target.value)} 
             />
+            <label>Password</label>
             <input type="password" 
-                placeholder="password" 
+                placeholder="Enter your password" 
                 value = {password}
                 onChange = {ev => setPassword(ev.target.value)} 
             />
             <button className="button-hover">Login</button>
+            <span className="signup-text">Don't have an account? 
+                <Link to="/register" className="signup-link"> Sign Up</Link>
+            </span>
         </form>
     );
 }
