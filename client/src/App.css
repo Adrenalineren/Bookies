@@ -717,6 +717,7 @@ a svg{
   max-width: fit-content;
   box-sizing: content-box;
   align-self: center;
+  color: #fff8f8;
 }
 
 /*
