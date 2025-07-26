@@ -1,7 +1,7 @@
 import {format} from 'date-fns';
 import {Link} from "react-router-dom";
 
-export default function Post({_id, title, review, content, cover, createdAt, author}) {
+export default function Post({_id, title, review, cover, createdAt, author, rating}) {
     return (
         <div className="post">
             <div className="image">
@@ -13,8 +13,12 @@ export default function Post({_id, title, review, content, cover, createdAt, aut
                 <Link to = {`/post/${_id}`}>
                     <h3>{title}</h3>
                 </Link>
+                <div className="rating">
+                    <strong>Rating: </strong>
+                    {'★'.repeat(rating)}{'☆'.repeat(5 - rating)}
+                </div>
                 <p className="info">
-                    <a className="author">Review by {author.username}</a>
+                    <span className="author">Review by {author.username}</span>
                     <time>{format(new Date(createdAt), 'MMM d, yyyy')}</time>
                 </p>
                 <p className="review">{review}</p>
