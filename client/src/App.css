@@ -143,6 +143,13 @@ div.post p.review{
   line-height: 1.4rem;
 }
 
+.post-title {
+  color: #755f40;
+  font-size: 0.57cm;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 form.login, form.register{
   max-width: 400px;
   margin: 0 auto;

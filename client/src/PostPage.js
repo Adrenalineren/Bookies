@@ -38,7 +38,7 @@ export default function PostPage() {
 
 return (
     <div className="post-page">
-        <h1>{postInfo.title}</h1>
+        <h1 style={{color: '#755f40'}}>{postInfo.title}</h1>
         {postInfo.createdAt && (
             <time>{format(new Date(postInfo.createdAt), 'dd MMM, yyyy')}</time>
         )}

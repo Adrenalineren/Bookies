@@ -11,7 +11,7 @@ export default function Post({_id, title, review, cover, createdAt, author, rati
             </div>
             <div className="texts">
                 <Link to = {`/post/${_id}`}>
-                    <h3>{title}</h3>
+                    <div className='post-title'>{title}</div>
                 </Link>
                 <div className="rating">
                     <strong>Rating: </strong>

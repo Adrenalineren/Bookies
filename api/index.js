@@ -263,7 +263,7 @@ app.post('/chat', async (req, res) => {
                     {
                         parts: [
                             { 
-                                text: messages
+                                text: "Please respond in plain text only. Do not use markdown formatting such as **bold**, *italic*, etc.\n\n" + messages,
                             }
                         ],
                     },
