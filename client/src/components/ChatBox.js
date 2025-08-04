@@ -11,7 +11,7 @@ const ChatBox = () => {
         setInput("");
 
         try {
-            const response = await fetch("http:////localhost:4000/chat",{
+            const response = await fetch("http://localhost:4000/chat",{
                 method:"POST",
                 headers : {
                     "Content-Type": "application/json",
@@ -35,6 +35,7 @@ const ChatBox = () => {
             {messages.map((msg,index) => (
                 <div
                     key={index}
+                    style={{ whiteSpace: "pre-wrap" }}
                     className={`chatbox-message ${msg.sender === "user" ? "user" : "bot"}`}
                 >
                     {msg.text}
