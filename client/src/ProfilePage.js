@@ -35,7 +35,6 @@ const ProfilePage = () => {
         });
     }, [userInfo]);
 
-    console.log("Current avatar path:", user.avatar);
      if (!userInfo) {
         return <Navigate to="/login" />;
     }   
@@ -92,7 +91,7 @@ const ProfilePage = () => {
                 ) : (
                     <>
                     {user.avatar && (
-                        <img src={`http://localhost:4000${user.avatar}`} alt="Profile" className="profile-avatar" />
+                        <img src={user.avatar} alt="Profile" className="profile-avatar" />
                     )}
                     <h1 className="profile-name">{user.name}</h1>
                     <div className="bio">

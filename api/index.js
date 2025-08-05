@@ -8,9 +8,13 @@ const bcrypt = require('bcryptjs');
 const app = express();
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+
 const multer = require('multer');
-const uploadMiddleware = multer({dest: 'uploads/'});
-const uploadAvatar = multer({ dest: 'uploads/' });
+const { storage } = require('./cloudinary');
+const upload = multer({ storage});
+
+//const uploadMiddleware = multer({dest: 'uploads/'});
+//const uploadAvatar = multer({ dest: 'uploads/' });
 const fs = require('fs');
 const fetch = require('node-fetch');
 const dotenv = require('dotenv');
@@ -87,10 +91,32 @@ app.post('/logout', (req,res) => {
     res.cookie('token', '').json('ok');
 });
 
-
-
 //To update avatar and bio
-app.put('/profile', uploadAvatar.single('avatar'), async (req,res) => {
+app.put('/profile', upload.single('avatar'), async (req,res) => {
+    const { token } = req.cookies;
+    const avatarUrl = req.file ? req.file.path : null;
+
+    try {
+    const userDecoded = jwt.verify(token, secret);
+    const updateData = { bio: req.body.bio };
+    if (avatarUrl) {
+      updateData.avatar = avatarUrl;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userDecoded.id,
+      updateData,
+      { new: true }
+    );
+    res.json(updatedUser);
+  } catch (err) {
+    console.error(err);
+    res.status(401).json('Unauthorized');
+  }
+});
+
+
+/*app.put('/profile', uploadAvatar.single('avatar'), async (req,res) => {
   const { token } = req.cookies;
   const { bio } = req.body;
   let avatarPath = null;
@@ -122,6 +148,7 @@ app.put('/profile', uploadAvatar.single('avatar'), async (req,res) => {
     res.status(401).json('Unauthorized');
   }
 });
+*/
 
 //Get user info to display on profile page
 app.get('/user', async (req, res) => {
@@ -135,6 +162,58 @@ app.get('/user', async (req, res) => {
   });
 });
 
+app.post('/post', upload.single('file'), async (req,res) => {
+    let coverUrl = null;
+    if (req.file && req.file.path) {
+        coverUrl = req.file.path;
+    }
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+        const {title, review, content, genres, rating} = req.body;
+        const genresArray = JSON.parse(genres);
+        const postDoc = await Post.create({
+        title, 
+        review,
+        content,
+        cover:coverUrl,
+        author: info.id,
+        genres: genresArray,
+        rating: parseInt(rating),
+        });
+    res.json(postDoc);
+    });
+})
+
+app.put('/post', upload.single('file'), async (req,res) => {
+    let coverUrl = null;
+    if (req.file && req.file.path) {
+        coverUrl = req.file.path;
+    }
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+        const {id, title, review, content, genres, rating} = req.body;
+        const genresArray = JSON.parse(genres);
+        const postDoc = await Post.findById(id);
+        const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+        if (!isAuthor) {
+            return res.status(400).json('you are NOT the author, get OUT');
+        }
+        postDoc.title = title;
+        postDoc.review = review;
+        postDoc.content = content;
+        if (coverUrl) {
+            postDoc.cover = coverUrl;
+        }
+        postDoc.genres = genresArray;
+        postDoc.rating = parseInt(rating);
+        await postDoc.save();
+        res.json(postDoc);
+    });
+})
+
+/*
 app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     let newPath = null;
     if (req.file) {
@@ -193,6 +272,7 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
         res.json(postDoc);
     });
 });
+*/ 
 
 app.get('/post', async (req, res) => {
     res.json(
@@ -349,5 +429,4 @@ app.post('/unfriend/:id', async (req, res) => {
 });
 
 app.listen(4000);
-
 //mongodb+srv://admin:Bookiesadmin123@cluster0.gxfpsx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
