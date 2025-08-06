@@ -381,9 +381,16 @@ app.post('/add-friend', async (req, res) => {
         if (err) return res.status(401).json('Unauthorised');
 
         const me = await User.findById(info.id);
+        const other = await User.findById(friendId);
+        // Add friendId to me.friends if not already there
         if (!me.friends.includes(friendId)) {
             me.friends.push(friendId);
             await me.save();
+        }
+        // Add me id to friends list if not already there :>
+        if (!other.friends.includes(me._id)) {
+            other.friends.push(me._id);
+            await other.save();
         }
         const friends = await User.find({_id: {$in: me.friends}}).select('username avatar');
         res.json(friends);
