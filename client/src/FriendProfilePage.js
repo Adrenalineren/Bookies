@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function FriendProfilePage() {
     const {friendId} = useParams();
@@ -11,7 +12,7 @@ export default function FriendProfilePage() {
     useEffect(() => {
         const fetchFriendData = async () => {
             try {
-                const res = await fetch(`http://localhost:4000/friend/${friendId}`, {
+                const res = await fetch(`${backendUrl}/friend/${friendId}`, {
                     credentials: 'include',
                 });
                 const data = await res.json();
@@ -27,7 +28,7 @@ export default function FriendProfilePage() {
     const {userInfo: user} = useContext(UserContext);
     const handleUnfriend = async () => {
         try {
-            const res = await fetch (`http://localhost:4000/unfriend/${friendId}`, {
+            const res = await fetch (`${backendUrl}/unfriend/${friendId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

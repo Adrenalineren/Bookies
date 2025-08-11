@@ -2,13 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect} from "react";
 import { UserContext } from "./UserContext";
 import VerticalNavBar from "./components/VerticalNavBar";
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function Header() {
   const {setUserInfo, userInfo} = useContext(UserContext);
   const navigate = useNavigate();
+  
   useEffect(() => {
-    fetch('http://localhost:4000/profile', {
+    fetch(`${backendUrl}/profile`, {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {
@@ -18,7 +19,7 @@ export default function Header() {
   }, []);
 
   function logout() {
-    fetch ('http://localhost:4000/logout', {
+    fetch (`${backendUrl}/logout`, {
       credentials: 'include',
       method: 'POST',
     });

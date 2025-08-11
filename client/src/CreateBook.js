@@ -2,6 +2,7 @@ import { useState } from "react";
 import 'react-quill/dist/quill.snow.css';
 import {Navigate} from 'react-router-dom';
 import Editor from "./Editor";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function CreateBook() {
     const [title,setTitle] = useState('');
@@ -17,7 +18,7 @@ export default function CreateBook() {
         if (checked) {
             setGenre(prev => [...prev,value]);
         } else {
-            setGenre(prev => prev.filter(genre => genre != value));
+            setGenre(prev => prev.filter(genre => genre !== value));
         }
     }
     async function createNewPost(ev) {
@@ -31,7 +32,7 @@ export default function CreateBook() {
 
         ev.preventDefault();
         console.log(files)
-        const response = await fetch('http://localhost:4000/post', {
+        const response = await fetch(`${backendUrl}/post`, {
             method: 'POST',
             body: data, 
             credentials: 'include',

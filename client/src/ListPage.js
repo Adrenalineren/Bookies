@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState} from "react";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function ListPage() {
     const [items, setItems] = useState([]);
@@ -29,7 +30,7 @@ export default function ListPage() {
     };
 
   useEffect(() => {
-    fetch('http://localhost:4000/list', {
+    fetch(`${backendUrl}/list`, {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -43,7 +44,7 @@ export default function ListPage() {
 
   useEffect(() => {
     if (firstLoad.current) return;
-    fetch('http://localhost:4000/list', {
+    fetch(`${backendUrl}/list`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       credentials: 'include',

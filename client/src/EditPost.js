@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {Navigate, useParams} from 'react-router-dom';
 import Editor from "./Editor";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function EditPost() {
     const {id} = useParams();
@@ -13,7 +14,7 @@ export default function EditPost() {
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:4000/post/' + id)
+        fetch(`${backendUrl}/post/${id}`)
         .then(response => {
             response.json().then(postInfo => {
                 setTitle(postInfo.title);
@@ -30,7 +31,7 @@ export default function EditPost() {
         if (checked) {
             setGenre(prev => [...prev,value]);
         } else {
-            setGenre(prev => prev.filter(genre => genre != value));
+            setGenre(prev => prev.filter(genre => genre !== value));
         }
     }
 
@@ -46,7 +47,7 @@ export default function EditPost() {
         if (files?.[0]) {
             data.set('file', files?.[0]);
         }
-        const response = await fetch('http://localhost:4000/post', {
+        const response = await fetch(`${backendUrl}/post`, {
             method: 'PUT',
             body: data,
             credentials: 'include',

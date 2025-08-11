@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "./UserContext";
 import {Link} from "react-router-dom";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function FriendsPage() {
     const { userInfo } = useContext(UserContext);
@@ -10,7 +11,7 @@ export default function FriendsPage() {
 
     useEffect(() => {
         //loading the existing friends
-        fetch('http://localhost:4000/friends', {
+        fetch(`${backendUrl}/friends`, {
             credentials: 'include',
         })
             .then(res => res.json())
@@ -28,7 +29,7 @@ export default function FriendsPage() {
     */
 
     const handleSearch = async () => {
-        const url = `http://localhost:4000/search-users?query=${encodeURIComponent(search)}`;
+        const url = `${backendUrl}/search-users?query=${encodeURIComponent(search)}`;
         console.log("Searching users at:", url);
 
         try {
@@ -51,7 +52,7 @@ export default function FriendsPage() {
     };
 
     const addFriend = (friendId) => {
-        fetch('http://localhost:4000/add-friend', {
+        fetch(`${backendUrl}/add-friend`, {
             method: 'POST',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
@@ -78,7 +79,7 @@ export default function FriendsPage() {
             <div className="search-results">
                 {results.map(user => (
                     <div key={user._id} className="user-result">
-                        <img src={`http://localhost:4000${user.avatar}`} alt = "avatar" width={50} height={50}/>
+                        <img src={user.avatar} alt = "avatar" width={50} height={50}/>
                         <span>{user.username}</span>
                         <button className="butt-on" onClick={() => addFriend(user._id)}>Add Friend</button>
                     </div>
@@ -95,7 +96,7 @@ export default function FriendsPage() {
                         key={friends._id}
                         style={{textDecoration: 'none', color:'inherit'}}>
                         <div className="friend-card">
-                            <img src={`http://localhost:4000${friends.avatar}`} alt="avatar" width={60} height={60}/>
+                            <img src={friends.avatar} alt="avatar" width={60} height={60}/>
                             <div>{friends.username}</div>
                         </div>
                     </Link>

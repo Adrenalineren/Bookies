@@ -2,6 +2,7 @@ import Post from "./Post";
 import SearchBar from "./components/SearchBar";
 import GenreFilter from "./components/GenreFilter";
 import { useState, useEffect } from "react";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function HomePage() {
     const [posts, setPosts] = useState([]);
@@ -11,7 +12,7 @@ export default function HomePage() {
     
 
     useEffect(() => {
-        fetch('http://localhost:4000/post').then(response => {
+        fetch(`${backendUrl}/post`).then(response => {
             response.json().then(posts => {
                 setPosts(posts);
                 setFilteredPosts(posts);
@@ -67,8 +68,3 @@ export default function HomePage() {
         </>
     );
 }
-/*
-{posts.length > 0 && posts.map(post => (
-                <Post {...post} />    
-            ))}
-*/

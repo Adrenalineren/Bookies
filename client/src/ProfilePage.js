@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
 const ProfilePage = () => {
@@ -20,7 +21,7 @@ const ProfilePage = () => {
 
         if (!userInfo) return;
 
-        fetch('http://localhost:4000/user',{
+        fetch(`${backendUrl}/user`,{
             credentials: 'include',
         })
             .then((res) => res.json())
@@ -48,7 +49,7 @@ const ProfilePage = () => {
 
         setEditMode(false);
 
-        const response = await fetch('http://localhost:4000/profile', {
+        const response = await fetch(`${backendUrl}/profile`, {
         method: 'PUT',
         credentials: 'include',
         body: formData,

@@ -3,13 +3,14 @@ import React, { useState, useEffect, useContext} from "react";
 import {format} from 'date-fns';
 import { UserContext } from "./UserContext";
 import { Link } from "react-router-dom";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function PostPage() {
     const [postInfo, setPostInfo] = useState(null);
     const {id} = useParams();
     const {userInfo} = useContext(UserContext);
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`${backendUrl}/post/${id}`)
             .then(response => {
                 response.json().then(postInfo => {
                     setPostInfo(postInfo);
@@ -23,7 +24,7 @@ export default function PostPage() {
         const confirmed = window.confirm("Are you sure you want to delete the review?")
         if (!confirmed) return;
 
-        fetch(`http://localhost:4000/post/${id}`,{
+        fetch(`${backendUrl}/post/${id}`,{
             method: 'DELETE',
             credentials: 'include',   
         }).then(response => {
