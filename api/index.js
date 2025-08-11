@@ -44,8 +44,12 @@ app.post('/register', async (req,res) => {
         });
         jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
             if(err) throw err;
-            res.cookie('token', token).json({
-                id:userDoc._id,
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            }).json({
+                id: userDoc._id,
                 username,
             });
         });
@@ -66,10 +70,20 @@ app.post('/login', async (req,res) => {
         //Logged in
         jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
             if(err) throw err;
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            }).json({
+                id: userDoc._id,
+                username,
+            });
+            /*
             res.cookie('token', token).json({
                 id:userDoc._id,
                 username,
             });
+            */
         });
     } else {
         res.status(400).json('Wrong password!');
