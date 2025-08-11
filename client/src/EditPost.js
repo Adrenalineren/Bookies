@@ -24,7 +24,7 @@ export default function EditPost() {
                 setRating(postInfo.rating || 0);
             });
         });
-    }, []);
+    }, [id]);
 
     function handleGenreSelect(ev){
         const { value, checked } = ev.target;

@@ -1,4 +1,6 @@
 import { useState } from "react";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const ChatBox = () => {
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([]);
@@ -11,7 +13,7 @@ const ChatBox = () => {
         setInput("");
 
         try {
-            const response = await fetch("http://localhost:4000/chat",{
+            const response = await fetch(`${backendUrl}/chat`,{
                 method:"POST",
                 headers : {
                     "Content-Type": "application/json",

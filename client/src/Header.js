@@ -7,7 +7,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 export default function Header() {
   const {setUserInfo, userInfo} = useContext(UserContext);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     fetch(`${backendUrl}/profile`, {
       credentials: 'include',
@@ -16,7 +16,7 @@ export default function Header() {
         setUserInfo(userInfo);
       });
     });
-  }, []);
+  }, [setUserInfo]);
 
   function logout() {
     fetch (`${backendUrl}/logout`, {
