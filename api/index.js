@@ -13,8 +13,6 @@ const multer = require('multer');
 const { storage } = require('./cloudinary');
 const upload = multer({ storage});
 
-//const uploadMiddleware = multer({dest: 'uploads/'});
-//const uploadAvatar = multer({ dest: 'uploads/' });
 const fs = require('fs');
 const fetch = require('node-fetch');
 const dotenv = require('dotenv');
@@ -28,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Generate salt for encryption
 const salt = bcrypt.genSaltSync(10); 
 const secret = process.env.JWT_SECRET;
-app.use(cors({credentials:true, origin:'http://localhost:3000'}));
+app.use(cors({credentials:true, origin: process.env.CLIENT_URL || 'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
@@ -115,41 +113,6 @@ app.put('/profile', upload.single('avatar'), async (req,res) => {
   }
 });
 
-
-/*app.put('/profile', uploadAvatar.single('avatar'), async (req,res) => {
-  const { token } = req.cookies;
-  const { bio } = req.body;
-  let avatarPath = null;
-
-  if (req.file) {
-    const { originalname, path } = req.file;
-    const ext = originalname.split('.').pop();
-    const newPath = path + '.' + ext;
-    fs.renameSync(path, newPath);
-    const fileName = newPath.split(/[/\\]/).pop();  
-    avatarPath = '/uploads/' + fileName
-  }
-
-  try {
-    const userDecoded = jwt.verify(token, secret);
-    const updateData = { bio: req.body.bio };
-    if (avatarPath) {
-      updateData.avatar = avatarPath;
-    }
-
-    const updatedUser = await User.findByIdAndUpdate(
-      userDecoded.id,
-      updateData,
-      { new: true }
-    );
-    res.json(updatedUser);
-  } catch (err) {
-    console.error(err);
-    res.status(401).json('Unauthorized');
-  }
-});
-*/
-
 //Get user info to display on profile page
 app.get('/user', async (req, res) => {
   const { token } = req.cookies;
@@ -212,67 +175,6 @@ app.put('/post', upload.single('file'), async (req,res) => {
         res.json(postDoc);
     });
 })
-
-/*
-app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
-    let newPath = null;
-    if (req.file) {
-        const {originalname, path} = req.file;
-        const parts = originalname.split('.');
-        const ext = parts[parts.length - 1];
-        newPath = path + "." + ext;
-        fs.renameSync(path, newPath);
-    }
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, async (err, info) => {
-        if (err) throw err;
-        const {title, review, content, genres, rating} = req.body;
-        const genresArray = JSON.parse(genres);
-        const postDoc = await Post.create({
-        title, 
-        review,
-        content,
-        cover:newPath,
-        author: info.id,
-        genres: genresArray,
-        rating: parseInt(rating),
-        });
-    res.json(postDoc);
-    });
-});
-
-app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
-    let newPath = null;
-    if (req.file) {
-    const {originalname, path} = req.file;
-    const parts = originalname.split('.');
-    const ext = parts[parts.length - 1];
-    newPath = path + "." + ext;
-    fs.renameSync(path, newPath);
-    }
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, async (err, info) => {
-        if (err) throw err;
-        const {id, title, review, content, genres, rating} = req.body;
-        const genresArray = JSON.parse(genres);
-        const postDoc = await Post.findById(id);
-        const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
-        if (!isAuthor) {
-            return res.status(400).json('you are NOT the author, get OUT');
-        }
-        postDoc.title = title;
-        postDoc.review = review;
-        postDoc.content = content;
-        if (newPath) {
-            postDoc.cover = newPath;
-        }
-        postDoc.genres = genresArray;
-        postDoc.rating = parseInt(rating);
-        await postDoc.save();
-        res.json(postDoc);
-    });
-});
-*/ 
 
 app.get('/post', async (req, res) => {
     res.json(
@@ -435,5 +337,7 @@ app.post('/unfriend/:id', async (req, res) => {
     });
 });
 
-app.listen(4000);
-//mongodb+srv://admin:Bookiesadmin123@cluster0.gxfpsx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
