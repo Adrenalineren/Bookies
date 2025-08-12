@@ -34,6 +34,11 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 //Connect to database
 mongoose.connect(process.env.MONGO_URI);
 
+//For health check on Render
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 //For register
 app.post('/register', async (req,res) => {
     const {username,password} = req.body;
