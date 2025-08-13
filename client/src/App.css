@@ -282,6 +282,7 @@ form.login h1, form.register h1{
 .genre-button {
   display: flex;
   flex-direction: column;
+  align-items: center;
   background: none;
   border: none;
   padding: 0px;
@@ -300,8 +301,9 @@ form.login h1, form.register h1{
 
 .genre-label {
   margin-top: 5px;
-  font-size: 10;
+  font-size: 14px;
   color: #AB9477;
+  text-align: center;
 }
 
 .clear-filter-button {
